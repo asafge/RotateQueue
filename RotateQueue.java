@@ -31,23 +31,28 @@ public class  RotateQueue<E> {
         Elements = new ArrayList<E>(capacity);
         Capacity = capacity;
         for (E item : items) {
-            this.AddElement(item);
+            this.addElement(item);
         }
     }
 
 	// Add a new element to the queue, clean-up old elements if needed
-	public synchronized void AddElement(E value) {
+	public synchronized void addElement(E value) {
 		if (Capacity == Elements.size()) {
             int deleteUntil = (int)Math.ceil(Capacity * FREE_SIZE);
             Elements = Elements.subList(deleteUntil, Capacity);
 		}
-		if (!this.SearchElement(value)) {
+		if (!this.searchElement(value)) {
 			Elements.add(value);
 		}
 	}
 
+    // Remove a list of elements from the queue
+    public synchronized void removeAll(ArrayList<E> elements) {
+        Elements.removeAll(elements);
+    }
+
 	// Search an element by value
-	public synchronized boolean SearchElement(E value) {
+	public synchronized boolean searchElement(E value) {
 		return Elements.contains(value);
 	}
 
