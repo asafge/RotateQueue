@@ -8,6 +8,7 @@ import java.util.List;
 public class  RotateQueue<E> {
 	public List<E> Elements;
 	public int Capacity;
+    private static double FREE_SIZE = 0.05;
 
 	// Constructor, creates a RotateQueue of Strings from a comma delimited String.
 	public RotateQueue(int capacity, String serialized) {
@@ -37,8 +38,8 @@ public class  RotateQueue<E> {
 	// Add a new element to the queue, clean-up old elements if needed
 	public synchronized void AddElement(E value) {
 		if (Capacity == Elements.size()) {
-			int deleteFrom = (int)Math.ceil(Capacity * 0.05);
-			Elements = Elements.subList(deleteFrom, Capacity);
+            int deleteUntil = (int)Math.ceil(Capacity * FREE_SIZE);
+            Elements = Elements.subList(deleteUntil, Capacity);
 		}
 		if (!this.SearchElement(value)) {
 			Elements.add(value);
