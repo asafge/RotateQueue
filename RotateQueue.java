@@ -20,7 +20,7 @@ public class  RotateQueue<E> {
 				if (v.trim().length() != 0) {
                     @SuppressWarnings("unchecked")
                     E item = (E)v;
-					this.AddElement(item);
+					this.addElement(item);
                 }
             }
 		}
